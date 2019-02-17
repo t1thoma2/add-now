@@ -27,19 +27,19 @@ function startGame(difficulty){
             gridX = 3;
             gridY = 3;
             timePerRound = 60;
-            max = 6;
+            max = 9;
             break;
         case 2:
             gridX = 4;
             gridY = 3;
             timePerRound = 60;
-            max = 10;
+            max = 20;
             break;
         case 3:
             gridX = 4;
             gridY = 4;
             timePerRound = 40;
-            max = 12;
+            max = 30;
             break;
         default:
             break;
@@ -60,9 +60,9 @@ function startSection() {
                 t = pool[seed + salt];
             }
         } else {
-            t = Math.floor(Math.random() * max) + 1;
+            t = Math.floor(Math.random() * (2 * max)) - max;
             while (xVal.contains(t)) {
-                t = Math.floor(Math.random() * max) + 1;
+                t = Math.floor(Math.random() * (2 * max)) - max;
             }
         }
         xVal[i-1] = t;
@@ -77,9 +77,9 @@ function startSection() {
                 t = pool[seed + salt];
             }
         } else {
-            t = Math.floor(Math.random() * max) + 1;
+            t = Math.floor(Math.random() * (2 * max)) - max;
             while (yVal.contains(t)) {
-                t = Math.floor(Math.random() * max) + 1;
+                t = Math.floor(Math.random() * (2 * max)) - max;
             }
         }
         yVal[j-1] = t;
@@ -137,7 +137,7 @@ function finish(){
     while (j <= gridY) {
         var i = 1;
         while (i <= gridX){
-            if (roughScale(document.getElementById(i.toString() + "-" + j.toString()).value, 10)/100 !== (xVal[i-1]*yVal[j-1])){
+            if (roughScale(document.getElementById(i.toString() + "-" + j.toString()).value, 10)/100 !== (xVal[i-1] + yVal[j-1])){
                 isIncorrect = true;
                 document.getElementById(i.toString() + "-" + j.toString()).style.color = "#8a8a8a";
             } else {
